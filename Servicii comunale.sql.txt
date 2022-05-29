@@ -1,0 +1,51 @@
+USE MASTER
+GO
+IF EXISTS(SELECT'True' FROM SYS.DATABASES WHERE NAME='Serviciicomunale')
+BEGIN
+DROP DATABASE Serviciicomunale
+END
+GO
+CREATE DATABASE Serviciicomunale
+GO
+USE Serviciicomunale
+GO
+
+CREATE TABLE Servicii(
+Id_Servicii 	Int Primary key,
+Serviciul Varchar(20),
+Plata_pentru_serviciu	Money
+)
+GO
+
+
+CREATE TABLE Apartament (
+Id_Apartament 	Int Primary key,
+Numar	    String,
+Nume_Proprietar	Varchar(20),
+NrCamere	Int,
+Consumul	Int ,
+Achitarea	Money
+ )
+GO
+CREATE TABLE Achitari (
+Id_Achitari Int Primary key,
+Id_Apartament 	Int Foreign key,
+Serviciul Varchar(20),
+Data_Achitarii DATA
+ )
+
+GO
+INSERT INTO Servicii(Id_Servicii ,Serviciul,Plata_pentru _serviciu)
+values ()
+GO
+
+INSERT INTO Apartament(Id_Apartament,Numar,Nume_Proprietar,NrCamere,Serviciul,Consumul, Achitarea)
+values ()
+
+GO
+
+INSERT INTO Achitari(Id_Achitari,Id_Apartament 	,Serviciul ,Data_Achitarii )
+values ()
+SELECT *FROM Achitari;
+SELECT *FROM Servicii;
+SELECT *FROM Apartament;

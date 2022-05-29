@@ -1,0 +1,93 @@
+--Varianta 2 Briceag Ion 
+USE MASTER
+GO
+IF EXISTS(SELECT'True' FROM SYS.DATABASES WHERE NAME='Companie')
+BEGIN
+DROP DATABASE Companie
+END
+GO
+CREATE DATABASE Companie
+GO
+USE Companie
+GO
+CREATE TABLE  Departamente (
+
+DepartamentId  Int PRIMARY KEY ,
+ManagerId Int ,
+NumeDepartament Varchar(20),
+CodDepartament Int
+ )
+
+GO
+CREATE TABLE  Proiecte (
+ProiecteID Int PRIMARY KEY,
+NumeProiect String ,
+CodProiect Int ,
+Buget Money,
+TermenLiminta DATA
+ )
+
+GO
+CREATE TABLE  AngajatiProiecte (
+AngajatiID Int PRIMARY KEY,
+ProiecteID Int FOREIGN KEY,
+NOreSaptamina String
+
+ )
+
+GO
+CREATE TABLE Angajati(
+Id_Angajat 	Int PRIMARY KEY,
+DepartamentId 	Int FOREIGN KEY,
+SupervizorId 	Int,
+Nume Varchar(20),
+Prenume Varchar(20),
+CNP String,
+Strada String,
+Numar String,
+Oras Varchar(20),
+Sector Varchar(20),
+Sex Varchar(20),
+DataNasterii DATA,
+Salariu Money
+)
+GO
+
+
+INSERT INTO Departamente (DepartamentId, ManagerId, NumeDepartament, CodDepartament)
+values (1,1,'Studierea',1),
+ (2,2,'Invatarea',2),
+(3,3,'Finansarea',3),
+(4,4,'Contabilitate',4),
+(5,5,'Elaborare',5)
+GO
+INSERT INTO Proiecte (ProiecteID ,NumeProiect ,CodProiect  ,Buget ,TermenLiminta  )
+values (1,'Primul',1,2000.00 ,2021-12-11),
+(2,'AlDoilea',1,2000.00 ,2021-1-11),
+(3,'Primul',1,2000.00 ,2021-12-11),
+(4,'AlDoilea',1,2000.00 ,2021-12-29),
+(5,'Primul',1,2000.00 ,2021-15-15)
+GO
+INSERT INTO AngajatiProiecte (AngajatiID ,ProiecteID ,NOreSaptamina )
+values (1,1,50),
+(2,2,21),
+(3,3,30),
+(4,4,60),
+(5,5,20)
+GO
+INSERT INTO Angajati(Id_Angajat,DepartamentId ,SupervizorId ,Nume,Prenume ,CNP ,Strada ,Numar,Oras ,Sector ,Sex ,DataNasterii ,Salariu )
+values (1,1,1,'Alexandreanu','Daniel','1234567891011','Ismail','078134221','Chisinau','Cimislia','M',2002-01-08,4000.00),
+(2,2,2,'Andoni','Vladimir','2634567891011','Ismail','078124321','Chisinau','Cimislia','M',2002-04-05,2000.00),
+(3,3,3,'Boico','Alexandru','3334567891011','Ismail','079174221','Chisinau','Cimislia','M',2002-02-05,6000.00),
+(4,4,4,'Briceag','Ion','4234567891011','Ismail','076974221','Chisinau','Cimislia','M',2002-01-01,100000.00),
+(5,5,5,'Buju','Nicoleta','5234567891011','Ismail','078564221','Chisinau','Cimislia','F',2002-05-05,7000.00)
+GO
+Select  Nume,Prenume ,NumeDepartament From Angajati,Departamente 
+Where  DepartamentId=NOT NULL
+
+Select Nume,Prenume ,NumeProiect, DepartamentId From Angajati,Proiecte
+Where  ProiecteID =NOT NULL
+
+Select  ORDER BY AngajatiID DESC From Angajati
+Where NOreSaptamina<40
+
